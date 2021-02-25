@@ -1,8 +1,7 @@
-#misc files to ignore
+# misc files to ignore
 .vscode/
+.gitignore
 Nature of Code.pdf
 
-#projects to ignore
+# projects to ignore
 _template
-rope
-ships game

@@ -2,7 +2,7 @@
 
 "use strict";
 
-var DETAIL_LEVEL = 1000; // number of dots drawn (times 1000)
+var DETAIL_LEVEL = 2000; // number of dots drawn (times 1000)
 var DRAW_SPEED = 10000; // 10000 recommended
 var DOT_SIZE = 1; // use higher values for low detail level
 var MAX_ZOOM_LEVEL = 6;

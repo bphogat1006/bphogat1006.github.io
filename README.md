@@ -9,6 +9,6 @@ This site is a work in progress that I am using to cleanly showcase a selection 
 
 ## Progress & Plans
 
-I have a large selection of projects that I plan to import into the website, and I am currently working on this transition. The actual project files are located within /assets/common/js/p5-projects/.
+I have a large selection of projects that I plan to import into the website, and I am currently working on this transition. The actual project files are located within /assets/common/js/p5/.
 
 At the same time, I am developing a basic home page with links to subpages for each project for easy viewing. After this, I will style the page with CSS.
