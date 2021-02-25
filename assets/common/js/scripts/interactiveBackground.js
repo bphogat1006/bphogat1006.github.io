@@ -1,4 +1,4 @@
-/// <reference path="../../lib/p5.js/TSDef/p5.global-mode.d.ts" />
+/// <reference path="../../../lib/p5.js/TSDef/p5.global-mode.d.ts" />
 
 "use strict";
 
@@ -59,7 +59,7 @@ function setup() {
     bubbles.push(new Bubble())
   }
   noStroke()
-  fill(255, 0, 0, 20)
+  fill(255, 0, 0, 15)
 }
 
 function draw() {
