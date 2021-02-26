@@ -17,18 +17,50 @@
 
     <div id="foreground">
       <h1>Project Showcase</h1>
-      <h2>Author: Bhavya Phogat</h2>
-      <h4>Made using JavaScript + p5.js </h3>
-      <li> <a href="projects/fractal-explorer.html">Fractal Explorer</a> </li>
-      <li> <a href="projects/branching-vine.html">Branching Vine</a> </li>
-      <li> <a href="projects/perlin-wave.html">Perlin Wave</a> </li>
-      <li> <a href="projects/dijkstra.html">Dijkstra Path Finder</a> </li>
-      <!-- <a href="projects/"></a> -->
+      <h3>Made using JavaScript + p5.js </h3>
+      <h3>Author: Bhavya Phogat</h2>
+      
+      <div id="project-list">
+        <div class=project-list-item>
+          <h4><a href="projects/fractal-explorer.html">Fractal Explorer</a></h4>
+          <p>Utilizes a mathematical method of creating fractals, called the "chaos game," to create fractals with different polygon frames.Utilizes a mathematical method of creating fractals, called the "chaos game," to create fractals with different polygon frames.</p>
+        </div>
+
+        <div class=project-list-item>
+          <h4><a href="projects/branching-vine.html">Branching Vine</a></h4>
+          <p>Uses the Perlin Noise technique to generate a natural looking vine pattern.</p>
+        </div>
+
+        <div class=project-list-item>
+          <h4><a href="projects/perlin-wave.html">Perlin Wave</a></h4>
+          <p>An animation that demonstrates the Perlin Noise function.</p>
+        </div>
+
+        <div class=project-list-item>
+          <h4><a href="projects/dijkstra.html">Dijkstra Path Finder</a></h4>
+          <p>A web of dots is generated. The program uses Dijkstra's pathfinding algorithm to find the shortest path between any two nodes.</p>
+        </div>
+
+        <!-- <div class=project-list-item>
+          <h4><a href="projects/PROJECT_NAME.html">Project_Name</a></h4>
+          <p>Description_here</p>
+        </div> -->
+      </div>
     </div>
+
+    <button id="interactiontype-button">Click</button>
 
     <link rel="stylesheet" href="assets/common/css/homePage.css">
     <script src="assets/lib/p5.js/p5.js"></script>
     <script src="assets/common/js/scripts/interactiveBackground.js"></script>
+    
+    <script>
+      var projects = document.getElementsByClassName("project-list-item")
+      for(var i=0; i < projects.length-1; i++) {
+        projects[i].style.borderBottom="2px solid black"
+      }
+      // console.log(maxWidth)
+    </script>
   </body>
 
 </html>
