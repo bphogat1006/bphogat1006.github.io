@@ -2,12 +2,15 @@
 
 "use strict";
 
+var colorTheme = 0 // hue
+var bubbleColor, backgroundColor
 var bubbles = []
-var bubbleDensity = 25000
+var bubbleDensity = 30000
+var bubbleSizeCoeff = 0.00030
 var numBubbles
 var bubbleRadius
-var speed = 0.040
-var windSpeed = 0.1
+var speed = 0.018
+var windSpeed = 0.13
 var noiseSpeed = 0.003
 var noiseAmplitude = 350
 var mouseRepelStrength = 0.002
@@ -16,7 +19,7 @@ var mouseInteractionType = 1
 
 class Bubble {
   constructor() {
-    this.radius = getBubbleRadius()
+    this.radius = pow(random(), 1/3) * bubbleRadius
     this.pos = createVector(random(windowWidth), 
         windowHeight+this.radius+random(0.03*pow(this.radius, 2)))
     this.vel = createVector()
@@ -31,7 +34,7 @@ class Bubble {
     this.draw()
     if(this.pos.y < -this.radius) {
       this.pos = createVector(random(windowWidth), windowHeight+this.radius)
-      this.size = getBubbleRadius()
+      this.size = pow(random(), 1/3) * bubbleRadius
       this.attractive = true
     }
     this.vel.add(createVector(0, -windSpeed))
@@ -42,8 +45,8 @@ class Bubble {
   }
   mouseInteraction() {
     var n = noise(this.xOff)*noiseAmplitude
-    var d = dist(mouseX, mouseY, this.pos.x+n, this.pos.y)
-    var range = (mouseInteractionType == 1) ? this.radius : windowWidth/3
+    var d = dist(mouseX, mouseY, this.pos.x + n, this.pos.y)
+    var range = (mouseInteractionType == 1) ? this.radius*1.10 : windowWidth/3
     
     if(d < range) {
       var r = range-d
@@ -64,37 +67,40 @@ class Bubble {
   }
 }
 
-function getBubbleRadius() {
-  return pow(random(), 1/3) * bubbleRadius
-}
-
 function changeInteractionType() {
   mouseInteractionType *= -1
   document.getElementById("interactiontype-button").style.background = 
-      (mouseInteractionType == 1) ? "rgb(255, 240, 240)" : "rgb(255, 200, 200)"
+      (mouseInteractionType == 1) ? "hsla(0, 0%, 0%, 0)" : "hsla(0, 100%, 50%, 0.25)"
+                                  // repel                attract
 }
 
 function setup() {
   var c = createCanvas(windowWidth, windowHeight)
   c.parent('background-animation')
-  noiseDetail(2, 0.75)
-  
-  var screenArea = windowWidth*windowHeight
-  numBubbles = screenArea/bubbleDensity
-  bubbleRadius = screenArea/4000
-  // print(bubbleRadius + "\n" + numBubbles)
-  while(bubbles.length < numBubbles) {
-    bubbles.push(new Bubble())
-  }
-
-  noStroke()
-  fill(255, 0, 0, 15)
 
   document.getElementById("interactiontype-button")
       .addEventListener("click", changeInteractionType)
+
+  colorMode('hsb')
+  backgroundColor = color(colorTheme, 20, 100)
+  bubbleColor = color(colorTheme, 100, 100, 0.05)
+  noiseDetail(2, 0.75)
+  noStroke()
+  
+  var screenArea = windowWidth*windowHeight
+  numBubbles = screenArea/bubbleDensity
+  bubbleRadius = screenArea*bubbleSizeCoeff
+  
+  while(bubbles.length < numBubbles) {bubbles.push(new Bubble())}
 }
 
 function draw() {
-  background(255, 240, 240);
+  background(backgroundColor) // background color
+  fill(colorTheme, 255, 255, 0.05) // bubble color
   bubbles.forEach(bubble => bubble.update())
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  setup()
 }

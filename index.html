@@ -27,24 +27,19 @@
         </div>
 
         <div class=project-list-item>
-          <h4><a href="projects/branching-vine.html">Branching Vine</a></h4>
-          <p>Uses the Perlin Noise technique to generate a natural looking vine pattern.</p>
+          <h4><a href="projects/perlin-wave.html">Perlin Wave</a></h4>
+          <p>An animation that demonstrates the Perlin Noise function.</p>
         </div>
 
         <div class=project-list-item>
-          <h4><a href="projects/perlin-wave.html">Perlin Wave</a></h4>
-          <p>An animation that demonstrates the Perlin Noise function.</p>
+          <h4><a href="projects/branching-vine.html">Branching Vine</a></h4>
+          <p>Uses the Perlin Noise technique to generate a natural looking vine pattern.</p>
         </div>
 
         <div class=project-list-item>
           <h4><a href="projects/dijkstra.html">Dijkstra Path Finder</a></h4>
           <p>A web of dots is generated. The program uses Dijkstra's pathfinding algorithm to find the shortest path between any two nodes.</p>
         </div>
-
-        <!-- <div class=project-list-item>
-          <h4><a href="projects/PROJECT_NAME.html">Project_Name</a></h4>
-          <p>Description_here</p>
-        </div> -->
       </div>
     </div>
 
@@ -53,14 +48,8 @@
     <link rel="stylesheet" href="assets/common/css/homePage.css">
     <script src="assets/lib/p5.js/p5.js"></script>
     <script src="assets/common/js/scripts/interactiveBackground.js"></script>
-    
-    <script>
-      var projects = document.getElementsByClassName("project-list-item")
-      for(var i=0; i < projects.length-1; i++) {
-        projects[i].style.borderBottom="2px solid black"
-      }
-      // console.log(maxWidth)
-    </script>
+    <script src="assets/common/js/scripts/projectInfo.js"></script>
+    <script src="assets/common/js/scripts/populateProjectList.js"></script>
   </body>
 
 </html>
