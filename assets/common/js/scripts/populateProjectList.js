@@ -1,12 +1,28 @@
 
-var projects = document.getElementsByClassName("project-list-item")
-var projectsContainer = document.getElementById("project-list")
-var a = projectInfo
+function createProjectItem(link, title, description) {
+  var project = document.createElement("div")
+  var mLink = document.createElement("a")
+  var mTitle = document.createElement("h4")
+  var mDescription = document.createElement("p")
 
-function createProjectItem(html, title, description) {
+  project.className = "project-list-item"
+  mLink.href = "projects/" + link + ".html"
+  mLink.appendChild(document.createTextNode(title))
+  mTitle.innerHTML = mLink.outerHTML
+  mDescription.innerHTML = description
 
+  project.appendChild(mTitle)
+  project.appendChild(mDescription)
+
+  return project
 }
 
-for(var i=0; i < projects.length-1; i++) {
-  projects[i].style.borderBottom="2px solid black"
+
+var projectsContainer = document.getElementById("project-list")
+for(var i=0; i < projectInfo.length; i++) {
+  var proj = createProjectItem(projectInfo[i].name, projectInfo[i].title, projectInfo[i].description)
+  if(i < projectInfo.length-1) {
+    proj.style.borderBottom="2px solid black"
+  }
+  projectsContainer.appendChild(proj)
 }

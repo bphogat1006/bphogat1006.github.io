@@ -25,14 +25,11 @@ html, body {
 .project-list-item h4 {
     /* background-color: rgb(255, 128, 128); */
     font-weight: bolder;
-    position: relative;
     flex: 1;
     text-align: center;
 }
 .project-list-item p {
     /* background-color: rgb(255, 196, 196); */
-    position: relative;
-    right: 0;
     flex: 4;
     text-align: left;
 }

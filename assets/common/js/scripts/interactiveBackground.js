@@ -2,67 +2,87 @@
 
 "use strict";
 
-var colorTheme = 0 // hue
-var bubbleColor, backgroundColor
+var projects = document.getElementsByClassName("project-list-item")
+for(let i=0; i < projects.length; i++) {
+  projects[i].addEventListener("mouseenter", function() {
+    newTheme = projectInfo[i].colorTheme
+  })
+}
+document.getElementById("project-list").addEventListener("mouseleave", () => newTheme = originalTheme)
+
+
+// colors
+var originalTheme = 0
+var colorTheme = originalTheme
+var newTheme = originalTheme
+
+// bubble vars
 var bubbles = []
-var bubbleDensity = 30000
-var bubbleSizeCoeff = 0.00030
-var numBubbles
+var bubbleDensity = 35000
+var bubbleSize = 0.00035
 var bubbleRadius
-var speed = 0.018
-var windSpeed = 0.13
-var noiseSpeed = 0.003
-var noiseAmplitude = 350
-var mouseRepelStrength = 0.002
-var mouseAttractStrength = 0.002
+
+// forces
+var drag = 8
+var wind = 8
+var mouseRepel = 40
+var mouseAttract = 40
 var mouseInteractionType = 1
 
 class Bubble {
   constructor() {
-    this.radius = pow(random(), 1/3) * bubbleRadius
-    this.pos = createVector(random(windowWidth), 
-        windowHeight+this.radius+random(0.03*pow(this.radius, 2)))
+    this.radius = getRadius()
+    this.pos = createVector(random(windowWidth), random(windowHeight+this.radius, windowHeight*2))
     this.vel = createVector()
+    this.mass = pow(this.radius, 1.5)
     this.xOff = random(10)
     this.attractive = true
   }
   draw() {
-    var n = noise(this.xOff)*noiseAmplitude
-    ellipse(this.pos.x + n, this.pos.y, this.radius, this.radius)
+    ellipse(this.pos.x, this.pos.y, this.radius, this.radius)
   }
   update() {
     this.draw()
     if(this.pos.y < -this.radius) {
       this.pos = createVector(random(windowWidth), windowHeight+this.radius)
-      this.size = pow(random(), 1/3) * bubbleRadius
+      this.radius = getRadius()
       this.attractive = true
     }
-    this.vel.add(createVector(0, -windSpeed))
-    this.vel.limit(pow(this.radius, 0.8)*speed) // pow balances speed btwn small & big bubbles
+    this.applyForce(wind)
+    var dragForce = createVector(drag/100000 * sq(this.vel.mag())/2 * sq(this.radius))
+    dragForce.rotate(this.vel.heading())
+    dragForce.mult(-1)
+    this.applyForce(dragForce)
     this.pos.add(this.vel)
-    this.xOff += noiseSpeed
     this.mouseInteraction()
   }
+  applyForce(force) {
+    var f = force.copy()
+    f.mult(1/this.radius)
+    this.vel.add(f)
+  }
   mouseInteraction() {
-    var n = noise(this.xOff)*noiseAmplitude
-    var d = dist(mouseX, mouseY, this.pos.x + n, this.pos.y)
-    var range = (mouseInteractionType == 1) ? this.radius*1.10 : windowWidth/3
+    var d = dist(mouseX, mouseY, this.pos.x, this.pos.y)
+    var range = (mouseInteractionType == 1) ? this.radius*0.75 : windowWidth/3
     
     if(d < range) {
-      var r = range-d
-      var force = createVector()
-
+      var force
       if(mouseInteractionType == 1) {
-        force = createVector(r * mouseRepelStrength)
+        force = mouseRepel.copy()
       }
       else {
-        if(d < this.radius/5) {this.attractive = false}
-        if(this.attractive) {force = createVector(-r * mouseAttractStrength)}
+        if(d < this.radius/5) {
+          this.attractive = false
+          return
+        }
+        if(this.attractive) {
+          force = mouseAttract.copy()
+        }
+        else return
       }
-
-      var angle = atan2(this.pos.y-mouseY, this.pos.x+n-mouseX)
+      var angle = atan2(this.pos.y-mouseY, this.pos.x-mouseX)
       force.rotate(angle)
-      this.vel.add(force)
+      this.applyForce(force)
     }
   }
 }
@@ -70,8 +90,16 @@ class Bubble {
 function changeInteractionType() {
   mouseInteractionType *= -1
   document.getElementById("interactiontype-button").style.background = 
-      (mouseInteractionType == 1) ? "hsla(0, 0%, 0%, 0)" : "hsla(0, 100%, 50%, 0.25)"
+      (mouseInteractionType == 1) ? "hsla("+colorTheme+", 0%, 0%, 0)" : "hsla("+colorTheme+", 100%, 50%, 0.25)"
                                   // repel                attract
+}
+
+function getRadius() {
+  var r
+  do {
+    r = pow(random(), 1/2) * bubbleRadius
+  } while(r < bubbleRadius/4)
+  return r
 }
 
 function setup() {
@@ -82,22 +110,26 @@ function setup() {
       .addEventListener("click", changeInteractionType)
 
   colorMode('hsb')
-  backgroundColor = color(colorTheme, 20, 100)
-  bubbleColor = color(colorTheme, 100, 100, 0.05)
-  noiseDetail(2, 0.75)
   noStroke()
+  noiseDetail(2, 0.75)
+
+  wind = createVector(0, -wind)
+  mouseRepel = createVector(mouseRepel, 0)
+  mouseAttract = createVector(-mouseAttract, 0)
   
   var screenArea = windowWidth*windowHeight
-  numBubbles = screenArea/bubbleDensity
-  bubbleRadius = screenArea*bubbleSizeCoeff
+  var numBubbles = screenArea/bubbleDensity
+  bubbleRadius = screenArea*bubbleSize
   
   while(bubbles.length < numBubbles) {bubbles.push(new Bubble())}
 }
 
 function draw() {
-  background(backgroundColor) // background color
-  fill(colorTheme, 255, 255, 0.05) // bubble color
+  background(colorTheme, 15, 100) // background color
+  fill(colorTheme, 100, 100, 0.07) // bubble color
   bubbles.forEach(bubble => bubble.update())
+
+  colorTheme += (newTheme - colorTheme)/20
 }
 
 function windowResized() {
