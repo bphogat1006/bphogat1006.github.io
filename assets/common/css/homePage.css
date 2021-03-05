@@ -9,7 +9,7 @@ html, body {
 }
 
 #project-list {
-    padding: 2em;
+    margin: 2em;
 }
 
 .project-list-item {

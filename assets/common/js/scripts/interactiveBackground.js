@@ -2,24 +2,15 @@
 
 "use strict";
 
-var projects = document.getElementsByClassName("project-list-item")
-for(let i=0; i < projects.length; i++) {
-  projects[i].addEventListener("mouseenter", function() {
-    newTheme = projectInfo[i].colorTheme
-  })
-}
-document.getElementById("project-list").addEventListener("mouseleave", () => newTheme = originalTheme)
-
-
 // colors
-var originalTheme = 0
-var colorTheme = originalTheme
-var newTheme = originalTheme
+var originalTheme = "rgb(255,0,0)"
+var colorTheme
+var newTheme
 
 // bubble vars
 var bubbles = []
-var bubbleDensity = 35000
-var bubbleSize = 0.00035
+var bubbleDensity = 35000 // bubble per [] pixels
+var bubbleSize = 0.00035 // coefficient for bubble size
 var bubbleRadius
 
 // forces
@@ -102,34 +93,61 @@ function getRadius() {
   return r
 }
 
+function changeColorTheme(projectNumber) {
+  newTheme = color(projectInfo[projectNumber].colorTheme)
+  print("fired: "+projectNumber)
+}
+
 function setup() {
+  // create canvas
   var c = createCanvas(windowWidth, windowHeight)
   c.parent('background-animation')
 
-  document.getElementById("interactiontype-button")
-      .addEventListener("click", changeInteractionType)
+  // add click listener to button
+  document.getElementById("interactiontype-button").addEventListener("click", changeInteractionType)
 
-  colorMode('hsb')
+  // automate color changing based mouse hover over project
+  var projects = document.getElementsByClassName("project-list-item")
+  for(let i=0; i < projects.length; i++) {
+    projects[i].addEventListener("mouseenter", function() {
+      newTheme = color(projectInfo[i].colorTheme)
+    })
+  }
+  document.getElementById("project-list").addEventListener("mouseleave", () => newTheme = originalTheme)
+  
+  // set color variables
+  originalTheme = color(originalTheme)
+  colorTheme = originalTheme
+  newTheme = originalTheme
+
+  // other options
   noStroke()
   noiseDetail(2, 0.75)
 
+  // set forces
   wind = createVector(0, -wind)
   mouseRepel = createVector(mouseRepel, 0)
   mouseAttract = createVector(-mouseAttract, 0)
   
+  // create bubbles
   var screenArea = windowWidth*windowHeight
   var numBubbles = screenArea/bubbleDensity
   bubbleRadius = screenArea*bubbleSize
-  
   while(bubbles.length < numBubbles) {bubbles.push(new Bubble())}
 }
 
 function draw() {
-  background(colorTheme, 15, 100) // background color
-  fill(colorTheme, 100, 100, 0.07) // bubble color
+  // draw background
+  background(lerpColor(colorTheme, color(255), 0.9))
+  
+  // draw bubbles
+  var bubbleColor = colorTheme
+  bubbleColor.setAlpha(12)
+  fill(bubbleColor)
   bubbles.forEach(bubble => bubble.update())
 
-  colorTheme += (newTheme - colorTheme)/20
+  // update color if changed
+  colorTheme = lerpColor(colorTheme, newTheme, 0.03)
 }
 
 function windowResized() {
