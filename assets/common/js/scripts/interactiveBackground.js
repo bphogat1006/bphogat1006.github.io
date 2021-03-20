@@ -17,7 +17,7 @@ var bubbleRadius
 var drag = 8
 var wind = 8
 var mouseRepel = 40
-var mouseAttract = 40
+var mouseAttract = 20
 var mouseInteractionType = 1
 
 class Bubble {

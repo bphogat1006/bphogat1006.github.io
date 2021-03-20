@@ -1,3 +1,5 @@
+/// <reference path="../../../../lib/p5.js/TSDef/p5.global-mode.d.ts" />
+
 
 // finds the shortest path btwn 2 selected nodes
 
@@ -6,13 +8,14 @@ var defaultColor;
 
 
 function setup() {
-  createCanvas(400, 400);
+  var c = createCanvas(windowWidth, windowHeight)
+  c.style('display', 'block')
   noStroke();
   fill(0);
   background(220, 240, 254);
   
   defaultColor = color(0), selectedColor = color(110, 207, 255);
-  NS = new NodeSystem(80, 2, 30, 45);
+  NS = new NodeSystem(80, 2, 27, 45);
   NS.draw();
   
 }

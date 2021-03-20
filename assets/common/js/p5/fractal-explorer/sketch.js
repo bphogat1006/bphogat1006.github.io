@@ -65,9 +65,10 @@ class Button {
 
 
 function setup() {
-  createCanvas(windowWidth-10, windowHeight-10);
+  var c = createCanvas(windowWidth, windowHeight)
+  c.parent('sketch')
   angleMode(DEGREES);
-  frameRate(999)
+  frameRate(9999)
 
   windowDiagonal = sqrt(pow(windowWidth, 2) + pow(windowHeight, 2));
   shapePresets = [

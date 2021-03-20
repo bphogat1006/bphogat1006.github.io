@@ -1,9 +1,8 @@
 html, body {
-    /* overflow: auto; */
     font-size: 20px;
 }
 
-#foreground {
+#content {
     margin: 0;
     padding: 1em 2em;
 }
@@ -14,8 +13,6 @@ html, body {
 
 .project-list-item {
     display: flex;
-    /* align-content: stretch; */
-    /* background-color: white; */
 }
 .project-list-item h4, p {
     margin: 0;
@@ -39,6 +36,10 @@ html, body {
 }
 .project-list-item a:hover {
     text-decoration: underline;
+}
+.project-list-item p > a {
+    text-decoration: underline;
+    
 }
 
 #background-animation {

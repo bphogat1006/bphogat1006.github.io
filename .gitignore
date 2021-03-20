@@ -1,6 +1,4 @@
 # misc files to ignore
 .vscode/
 Nature of Code.pdf
-
-# projects to ignore
-_template
+*template*
