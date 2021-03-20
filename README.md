@@ -9,6 +9,12 @@ This site is a work in progress that I am using to cleanly showcase a selection 
 
 ## Progress & Plans
 
-I have a large selection of projects that I plan to import into the website, and I am currently working on this transition. The actual project files are located within /assets/common/js/p5/.
+Currently, I have completed a clean home page design with animations and links to each project. I have a selection of projects that I am still working on importing into the website. The actual project files are located within /assets/common/js/p5/. I am also working on restructuring the website in a way that will make adding new projects quick and seamless to speed up the process
 
-At the same time, I am developing a basic home page with links to subpages for each project for easy viewing. After this, I will style the page with CSS.
+As my project list grows, I will implement a filter on the home page that lets you view projects based on tags, such as "animation", "interactive", "natural", etc.
+
+Later, I will add buttons in the top right corner of each project subpage for a few different purposes:
+- back to home button
+- info button with a text pop-up detailing what the project does, and how to use it (if it is interactive)
+- refresh button
+- view source code button
