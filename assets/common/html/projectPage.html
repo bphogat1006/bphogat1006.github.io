@@ -9,30 +9,24 @@
       margin: 0;
     }
   </style>
-  
-  <div id="sketch"></div>
-
-  <link rel="stylesheet" href="../css/projectPage.css">
-  <script src="../js/scripts/projectInfo.js"></script>
-  <script src="../js/scripts/projectPage.js"></script>
-  <script src="../../lib/p5.js/p5.js"></script>
-  <script>
-    var projName = location.href.split("=")[1]
-    var projInfo
-
-    // set page title
-    projectInfo.forEach(function(proj) {if(proj.name===projName){projInfo=proj}})
-    document.getElementById("projectTitle").innerHTML = projInfo.title
-
-    // load p5 script
-    var script = document.createElement('script')
-    script.src = "../js/p5/"+projName+"/sketch.js"
-    document.head.appendChild(script);
-  </script>
 </head>
 
 <body>
   <main>
+    <div id="sketch"></div>
+    
+    <div id="buttons">
+      <i id="home" class="fas fa-home"></i>
+      <i id="refresh" class="fas fa-sync-alt"></i>
+      <i id="info" class="fas fa-info-circle"></i>
+      <i id="source_code" class="fas fa-code"></i>
+    </div>
+  
+    <script src="https://kit.fontawesome.com/5d2140906c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/projectPage.css">
+    <script src="../js/scripts/projectInfo.js"></script>
+    <script src="../js/scripts/projectPage.js"></script>
+    <script src="../../lib/p5.js/p5.js"></script>
   </main>
 </body>
 
