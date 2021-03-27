@@ -15,7 +15,8 @@ function setup() {
   background(220, 240, 254);
   
   defaultColor = color(0), selectedColor = color(110, 207, 255);
-  NS = new NodeSystem(80, 2, 27, 45);
+  var screenSize = windowWidth*windowHeight
+  NS = new NodeSystem(screenSize/2000, 2, 27, 45);
   NS.draw();
   
 }
@@ -52,7 +53,7 @@ class NodeSystem {
     this.path = null;
     // create nodes
     for (var i = 0; i < n; i++) {
-      var pos = createVector(random(50, 375), random(50, 375));
+      var pos = createVector(random(50, windowWidth-150), random(50, windowHeight-50));
       while (true) {
         var valid = true;
         for (var j in this.nodes) {
@@ -64,7 +65,7 @@ class NodeSystem {
         if (valid) {
           break;
         }
-        pos = createVector(random(50, 350), random(50, 350));
+        pos = createVector(random(50, windowWidth-150), random(50, windowHeight-50));
       }
       this.nodes.push(new Node(pos));
     }
@@ -169,14 +170,14 @@ class NodeSystem {
     var dist = new Array(n);
     var prev = new Array(n);
     done.fill(false);
-    dist.fill(999);
+    dist.fill(9999999);
     prev.fill(null);
     dist[n1] = 0;
     var fringe = [n1];
     // println(n1 + " " + n2);
     while (true) {
       // picking the min dist value in the fringe as the new src node
-      var src = { ind: null, val: 999 };
+      var src = { ind: null, val: 9999999 };
       for (var i in fringe) {
         if (dist[fringe[i]] < src.val) {
           src.ind = fringe[i];
@@ -209,7 +210,7 @@ class NodeSystem {
         return { prev: prev, start: n1, end: n2 };
       }
       if (fringe.length === 0) {
-        console.log("FAILURE");
+        alert("FAILURE - no path available");
         return null;
       }
     }
