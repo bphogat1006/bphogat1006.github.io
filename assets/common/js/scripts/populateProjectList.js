@@ -6,7 +6,7 @@ function createProjectItem(link, title, description) {
   var mDescription = document.createElement("p")
 
   project.className = "project-list-item"
-  mLink.href = "projects/" + link + ".html"
+  mLink.href = "assets/common/html/projectPage.html?name="+link
   mLink.appendChild(document.createTextNode(title))
   mTitle.innerHTML = mLink.outerHTML
   mDescription.innerHTML = description

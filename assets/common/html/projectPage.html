@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title id=projectTitle></title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  
+  <div id="sketch"></div>
+
+  <link rel="stylesheet" href="../css/projectPage.css">
+  <script src="../js/scripts/projectInfo.js"></script>
+  <script src="../js/scripts/projectPage.js"></script>
+  <script src="../../lib/p5.js/p5.js"></script>
+  <script>
+    var projName = location.href.split("=")[1]
+    var projInfo
+
+    // set page title
+    projectInfo.forEach(function(proj) {if(proj.name===projName){projInfo=proj}})
+    document.getElementById("projectTitle").innerHTML = projInfo.title
+
+    // load p5 script
+    var script = document.createElement('script')
+    script.src = "../js/p5/"+projName+"/sketch.js"
+    document.head.appendChild(script);
+  </script>
+</head>
+
+<body>
+  <main>
+  </main>
+</body>
+
+</html>

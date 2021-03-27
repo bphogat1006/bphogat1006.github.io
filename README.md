@@ -9,7 +9,7 @@ This site is a work in progress that I am using to cleanly showcase a selection 
 
 ## Progress & Plans
 
-Currently, I have completed a clean home page design with animations and links to each project. I have a selection of projects that I am still working on importing into the website. The actual project files are located within /assets/common/js/p5/. I am also working on restructuring the website in a way that will make adding new projects quick and seamless to speed up the process
+Currently, I have completed a clean home page design with animations and links to each project. I have a large selection of projects that I am still working on importing into the website. The current actual project files are located within /assets/common/js/p5/. I have restructured the website in a way that will make adding new projects quick and seamless to speed up the process. Rather than having an html page for each project, there is now one page which dynamically loads whichever p5 sketch the user picks.
 
 As my project list grows, I will implement a filter on the home page that lets you view projects based on tags, such as "animation", "interactive", "natural", etc.
 

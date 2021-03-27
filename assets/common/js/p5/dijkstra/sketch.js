@@ -9,7 +9,7 @@ var defaultColor;
 
 function setup() {
   var c = createCanvas(windowWidth, windowHeight)
-  c.style('display', 'block')
+  c.parent('sketch')
   noStroke();
   fill(0);
   background(220, 240, 254);

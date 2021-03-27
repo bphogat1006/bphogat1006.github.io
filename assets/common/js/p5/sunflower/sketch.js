@@ -21,7 +21,7 @@ function draw() {
   translate(windowWidth/2, windowHeight/2);
   rotate(rotateAmount);
 
-  fill(255, 255*(1-radius/windowHeight*1.2), 255*(radius/windowHeight*1.2));
+  fill(255, 255*(1-radius/windowHeight*1.2), 255*(radius/windowHeight*1.3));
   ellipse(0, 0-radius, pow(radius, 0.4)*dotSizeCoeff, pow(radius, 0.4)*dotSizeCoeff);
   
   radius += radiusIncrement;
