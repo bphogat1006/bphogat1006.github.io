@@ -67,7 +67,7 @@ function draw() {
     
     dx = mouseX-pmouseX;
     dy = mouseY-pmouseY;
-    if((dx||dy) && mouseIsPressed) {
+    if((dx||dy) && mouseIsPressed && mouseX < windowWidth-70) {
         if(!drawing) {
             drawing = true;
             vines.push(new Vine(createVector(

@@ -23,7 +23,7 @@ document.getElementById("home").onclick = function() {
 }
 // info button
 document.getElementById("info").onclick = function() {
-
+  window.alert(thisProject.extraInfo)
 }
 // refresh buton
 document.getElementById("refresh").onclick = function() {
