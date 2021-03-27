@@ -21,6 +21,7 @@ function setup() {
 }
 
 function mouseClicked() {
+  if(mouseX > windowWidth-70) return
   background(220, 240, 254);
   NS.selectNearest(mouseX, mouseY);
   NS.draw();

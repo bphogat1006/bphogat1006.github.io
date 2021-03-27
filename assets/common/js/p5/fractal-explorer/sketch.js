@@ -8,17 +8,6 @@ var DOT_SIZE = 1; // use higher values for low detail level
 var MAX_ZOOM_LEVEL = 6;
 
 
-
-
-
-
-
-
-
-
-
-
-
 var vertices = [];
 var dots = [];
 var maxDots = DETAIL_LEVEL*1000;
@@ -26,7 +15,7 @@ var newDotsPerFrame = DRAW_SPEED; //dots created per frame initially
 var tracer;
 var curr=0, prev=0, prev2=0;
 var animate = false;
-
+var theme = getProject(location.href.split("name=")[1]).colorTheme
 
 var bufferStart = 0;
 var bufferSize = 5000; //dots drawn per frame (while zooming in)
@@ -38,6 +27,8 @@ var zoomChanged = false;
 
 var shapePresets = [];
 var windowDiagonal;
+var dotsSlider
+var rulesRadio
 
 
 class Button {
@@ -49,12 +40,11 @@ class Button {
     this.h = 36;
   }
   draw() {
-    noStroke();
-    fill(194, 252, 255);
     rect(this.x, this.y, this.w, this.h);
     fill(0);
     textSize(22);
     text(this.msg, this.x+10, this.y+26);
+    fill(color(theme))
   }
   pressed() {
     if(mouseIsPressed && mouseX>this.x && mouseX<this.x+this.w && mouseY>this.y && mouseY<this.y+this.h)
@@ -69,6 +59,8 @@ function setup() {
   c.parent('sketch')
   angleMode(DEGREES);
   frameRate(9999)
+  noStroke();
+  fill(color(theme))
 
   windowDiagonal = sqrt(pow(windowWidth, 2) + pow(windowHeight, 2));
   shapePresets = [
@@ -128,7 +120,7 @@ function draw() {
     }
   }
 
-  // draw points
+  // draw dots
   else {
     stroke(0);
     strokeWeight(DOT_SIZE);
@@ -144,14 +136,11 @@ function draw() {
       // RULES
 
       // don't pick the same vertex as the previous one
-      while(curr === prev) {
-        curr = floor(random()*vertices.length);
+      if(vertices.length > 3) {
+        while(curr === prev) {
+          curr = floor(random()*vertices.length);
+        }
       }
-      
-      // don't pick either of the previous 2 vertices
-      // while(curr === prev || curr === prev2) {
-      //   curr = floor(random()*vertices.length);
-      // }
       
       // next vertex cannot be one place away (anti-clockwise) from the previous
       // while(curr === (prev-1+vertices.length)%vertices.length) {
@@ -205,7 +194,6 @@ function draw() {
     // println(dots.length);
   }
 
-  fill(255, 0, 0);
   noStroke();
   for(var i=0; i < vertices.length && !zoomLevel; i++) {
     ellipse(vertices[i].x, vertices[i].y, 10, 10);
@@ -215,14 +203,13 @@ function draw() {
     bufferStart += bufferSize;
   }
 
-  fill(0, 255, 0);
-  noStroke();
   var progress = (dots.length < maxDots) ? dots.length/maxDots : bufferStart/maxDots;
   rect(0, 0, progress*width, 15);
 };
 
 
 function mousePressed() {
+  if(mouseX > windowWidth-70) return
   if(!animate) {
     vertices.push(createVector(mouseX, mouseY));
   }

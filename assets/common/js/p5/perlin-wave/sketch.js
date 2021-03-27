@@ -21,7 +21,7 @@ class NoiseGen {
     var n = noise(0)
     this.min = n
     this.max = n
-    for (var i = 1; i < 10000; i+=0.1) {
+    for (var i = 1; i < 100000; i+=0.1) {
       n = noise(i * 0.003)
       if (n < this.min) {
         this.min = n

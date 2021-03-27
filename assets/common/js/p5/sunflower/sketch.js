@@ -4,7 +4,7 @@
 
 var goldenRatio = (Math.sqrt(5)+1)/2;
 
-var rotateIncrement = 360/(goldenRatio);
+var rotateIncrement = 2*Math.PI/(goldenRatio);
 var rotateAmount = 0;
 var radius = 0;
 var radiusIncrement = 0.6;
@@ -13,7 +13,6 @@ var dotSizeCoeff = 3;
 function setup() {
   var c = createCanvas(windowWidth, windowHeight)
   c.parent('sketch')
-  angleMode(DEGREES)
   noStroke();
 }
 
