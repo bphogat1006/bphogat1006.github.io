@@ -1,4 +1,5 @@
 # misc files to ignore
 .vscode/
+*.code-workspace
 Nature of Code.pdf
 *template*

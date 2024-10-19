@@ -12,7 +12,6 @@ document.head.appendChild(script);
 
 // edit buttons
 var buttons = document.getElementsByTagName('i')
-console.log(buttons.length)
 for(var i=0; i < buttons.length; i++) {
   // change color
   buttons[i].style.color = thisProject.colorTheme

@@ -77,6 +77,39 @@ var projectInfo = [
     extraInfo:
     "BACKGROUND\nThe 'Golden Ratio' is found in many places in nature, from nautilus shells to petals on a rose. It is also a very important tool for designers who want to make logos and designs that are pleasing to the eye.\nIt is defined as ( 1 + sqrt(5) ) / 2\n\nTHIS PROJECT\nThe Golden Ratio is very clear in the disk florets of flowers in the Asteraceae family, such as sunflowers. The florets are arranged using the ratio because it is a very efficient and compact way of packing them around the center. This program simulates this packing with an animation. Starting from the center, dots are placed in a circular fashion, rotating by the angle of 2PI/goldenRatio each time a dot is placed. The radius is also slightly increased with each dot that is placed. Soon, the pattern appears of the center of a sunflower. See below for a comparison.\nhttps://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Helianthus_whorl.jpg/440px-Helianthus_whorl.jpg"
   },
+  {
+    name: "gravity-sim",
+    title: "Gravity Simulator",
+    colorTheme: "rgb(186, 42, 201)",
+    tags: [
+      "natural",
+      "math",
+      "animation",
+      "interactive"
+    ],
+    
+    description:
+    "Using real physics equations for gravity, this simple simulation demonstrates how planets in a system orbit a sun.",
+    
+    extraInfo:
+    ""
+  },
+  {
+    name: "barnsleys-fern",
+    title: "Barnsley Fern",
+    colorTheme: "rgb(50, 255, 50)",
+    tags: [
+      "natural",
+      "math",
+      "interactive"
+    ],
+    
+    description:
+    "",
+    
+    extraInfo:
+    ""
+  },
 ]
 
 // <a href='LINK_HERE' target='_blank'>TEXT_HERE</a>
